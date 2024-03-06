@@ -1,0 +1,24 @@
+-- a few simple queries on the database
+
+-- select all records
+SELECT * FROM StudentNames;
+
+-- select specific columns
+SELECT FirstName, LastName FROM StudentNames;
+
+-- select records with a specific name
+SELECT * FROM StudentNames WHERE FirstName = 'Emily';
+
+-- count total number of records
+SELECT COUNT(*) FROM StudentNames;
+
+-- order records by last name
+SELECT * FROM StudentNames ORDER BY LastName;
+
+-- select records within a range of ids
+SELECT * FROM StudentNames WHERE ID BETWEEN 10 AND 20;
+
+
+-- get the names associated with the IDs 25, 50, 75, 100 
+SELECT ID, FirstName, LastName FROM StudentNames
+WHERE ID IN (25, 50, 75, 100);
