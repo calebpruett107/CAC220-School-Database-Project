@@ -1,0 +1,16 @@
+-- Create table
+CREATE TABLE Age (
+    ID INT PRIMARY KEY,
+    AgeOfStudents VARCHAR(60)
+);
+
+-- Insert records
+INSERT INTO Age (ID, AgeOfStudents) VALUES
+(1, 'Infants - 6 months to 12 months'),
+(2, 'Younger Toddlers - 12 months to 18 months'),
+(3, 'Older Toddlers - 18 months to 2 years'),
+(4, '3 year olds'),
+(5, '4 year olds'),
+(6, '5 year olds');
+
+SELECT * FROM Age
