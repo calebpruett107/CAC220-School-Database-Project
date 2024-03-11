@@ -25,3 +25,10 @@ create table Courses(
     CourseName VARCHAR(255),
     PD_Hrs FLOAT
 )
+
+
+INSERT INTO courses (ID, CourseName, PD_Hrs) VALUES
+(1001, 'A Guide to Webb''s DOK', 1),
+(1002, 'A Review of Boundaries, Communication, and Professionalism in the Classroom', 1),
+(1003, 'Aligning Homework to Instruction', 1),
+(1004, 'An Introduction to Logical Fallacies', 1);
