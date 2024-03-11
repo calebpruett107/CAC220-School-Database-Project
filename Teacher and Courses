@@ -18,3 +18,10 @@ INSERT INTO teachers (ID, FirstName, LastName, CourseID) VALUES
 (4, 'David', 'Lee', 1002),
 (4, 'David', 'Lee', 1003),
 (4, 'David', 'Lee', 1004);
+
+
+create table Courses(
+    ID INT,
+    CourseName VARCHAR(255),
+    PD_Hrs FLOAT
+)
