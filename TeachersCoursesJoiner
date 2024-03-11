@@ -1,0 +1,14 @@
+-- joining teachers and courses table
+-- (make the two talk)
+-- ***The goal is to be able to query for a teacher name and the ouput will be ammount of PD_Hrs that teacher has***
+
+SELECT 
+    t.FirstName, 
+    t.LastName, 
+    SUM(c.PD_Hrs) AS Total_PD_Hours
+FROM 
+    Teachers t
+JOIN 
+    Courses c ON t.CourseID = c.ID
+GROUP BY 
+    t.FirstName, t.LastName;
