@@ -1,1 +1,11 @@
-C
+https://www.modelteaching.com/professional-development-courses
+
+create table Teachers(
+    ID INT PRIMARY KEY,
+    FirstName VARCHAR(30),
+    LastName VARCHAR(30),
+    CourseID INT 
+    
+);
+
+
