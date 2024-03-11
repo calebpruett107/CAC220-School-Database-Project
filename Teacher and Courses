@@ -1,0 +1,20 @@
+https://www.modelteaching.com/professional-development-courses
+
+create table Teachers(
+    ID INT PRIMARY KEY,
+    FirstName VARCHAR(30),
+    LastName VARCHAR(30),
+    CourseID INT 
+    
+);
+
+
+INSERT INTO teachers (ID, FirstName, LastName, CourseID) VALUES
+(1, 'Emily', 'Wilson', 1001),
+(1, 'Emily', 'Wilson', 1004),
+(2, 'Daniel', 'Garcia', 1003),
+(2, 'Daniel', 'Garcia', 1001),
+(3, 'Sarah', 'Thompson', 1002),
+(4, 'David', 'Lee', 1002),
+(4, 'David', 'Lee', 1003),
+(4, 'David', 'Lee', 1004);
