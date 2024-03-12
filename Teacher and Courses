@@ -24,7 +24,7 @@ create table Courses(
     ID INT,
     CourseName VARCHAR(255),
     PD_Hrs FLOAT
-)
+);
 
 
 INSERT INTO courses (ID, CourseName, PD_Hrs) VALUES
