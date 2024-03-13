@@ -1,0 +1,38 @@
+-- Goal of assigning each student in the StudentNames table an 
+-- age from the Age table, create a third table that acts 
+-- as a link between these two tables. 
+-- This third table, we can call StudentAges, references the 
+-- primary key from both the Age and StudentNames tables to 
+-- establish a relationship between a student and their age group.
+
+-- Create table
+CREATE TABLE StudentAges (
+    StudentID INT,
+    AgeID INT,
+    PRIMARY KEY (StudentID, AgeID),
+    FOREIGN KEY (StudentID) REFERENCES StudentNames(ID),
+    FOREIGN KEY (AgeID) REFERENCES Age(ID)
+);
+
+
+-- now instead of just assigning one student an age we need to 
+-- do it for all 125 students
+-- distribute students across age groups
+INSERT INTO StudentAges (StudentID, AgeID)
+SELECT ID, CASE
+    WHEN ID % 6 = 0 THEN 6
+    WHEN ID % 6 = 1 THEN 1
+    WHEN ID % 6 = 2 THEN 2
+    WHEN ID % 6 = 3 THEN 3
+    WHEN ID % 6 = 4 THEN 4
+    WHEN ID % 6 = 5 THEN 5
+END AS AgeID
+FROM StudentNames;
+COMMIT;
+
+-- now we need to query the data
+SELECT StudentNames.FirstName, StudentNames.LastName, Age.AgeOfStudents
+FROM StudentAges
+JOIN StudentNames ON StudentAges.StudentID = StudentNames.ID
+JOIN Age ON StudentAges.AgeID = Age.ID
+ORDER BY StudentNames.ID;
