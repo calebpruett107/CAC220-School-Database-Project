@@ -1,0 +1,12 @@
+-- Update studentnames table to add vax_card, gender, and priority
+ALTER TABLE studentnames ADD COLUMN vaccination_card VARCHAR(3);
+ALTER TABLE studentnames ADD COLUMN gender CHAR(6);
+ALTER TABLE studentnames ADD COLUMN priority_on_list INT;
+
+
+-- Update the new columns randomly
+UPDATE studentnames
+SET
+    vaccination_card = IF(RAND() < 0.5, 'Yes', 'No'),
+    gender = IF(RAND() < 0.5, 'Male', 'Female'),
+    priority_on_list = FLOOR(1 + (RAND() * 5));
