@@ -1,0 +1,15 @@
+-- Create table
+CREATE TABLE StudentNames (
+    ID INT PRIMARY KEY,
+    FirstName VARCHAR(25),
+    LastName VARCHAR(25)
+);
+
+-- Add columns
+ALTER TABLE StudentNames
+ADD COLUMN ID INT,
+ADD COLUMN Allergies VARCHAR(100),
+ADD COLUMN SpecialNeeds BOOLEAN,
+ADD COLUMN ImmunizationForm BOOLEAN,
+ADD COLUMN Sessions INT,
+ADD COLUMN WaitingList BOOLEAN;
