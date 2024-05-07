@@ -1,0 +1,14 @@
+-- create new table called teachers
+
+CREATE TABLE teachers (
+    teacher_id INT PRIMARY KEY,
+    FirstName VARCHAR(100),
+    LastName VARCHAR(100)
+);
+
+INSERT INTO teachers (teacher_id, FirstName, LastName) VALUES
+(1, 'Emily', 'Wilson'),
+(2, 'Daniel', 'Garcia'),
+(3, 'Sarah', 'Thompson'),
+(4, 'David', 'Lee'),
+(5, 'Chris', 'Brown');
