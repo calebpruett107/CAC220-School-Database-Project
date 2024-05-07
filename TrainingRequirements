@@ -1,0 +1,23 @@
+-- Create Teacher Training Requirements
+CREATE TABLE TrainingRequirements (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    TeacherName VARCHAR(255) NOT NULL,
+    TeacherAid BOOLEAN NOT NULL,
+    EducationDegree VARCHAR(255) NOT NULL,
+    ImmunizationsCleared BOOLEAN NOT NULL
+);
+
+-- Add teachers to table
+
+INSERT INTO TrainingRequirements (TeacherName, TeacherAid, EducationDegree, ImmunizationsCleared) VALUES
+('John Doe', false, 'Bachelor of Science in Education', true),
+('Jane Smith', true, 'Associate Degree in Education', true),
+('Michael Johnson', false, 'Master of Education', true),
+('Emily Williams', false, 'Bachelor of Arts in Education', true),
+('David Brown', true, 'High School Diploma', true),
+('Jessica Miller', false, 'Doctor of Education', true),
+('Christopher Wilson', false, 'Master of Science in Education', true),
+('Jennifer Davis', true, 'Associate Degree in Early Childhood Education', true),
+('Matthew Martinez', false, 'Bachelor of Education', true),
+('Amanda Anderson', true, 'Certification in Education', true);
+
