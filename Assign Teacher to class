@@ -1,0 +1,21 @@
+-- Update teachers table to assign teachers to classes
+UPDATE teachers
+SET EntityType = 'Teacher',
+    Priority = NULL
+WHERE teacher_id IN (2, 3, 4, 5); -- Assuming you have 5 teachers
+
+-- Assigning teachers to each class individually
+UPDATE class1
+SET teacher_id = 2; -- Assigning teacher with ID 2 to class1
+
+UPDATE class2
+SET teacher_id = 3; -- Assigning teacher with ID 3 to class2
+
+UPDATE class3
+SET teacher_id = 4; -- Assigning teacher with ID 4 to class3
+
+UPDATE class4
+SET teacher_id = 5; -- Assigning teacher with ID 5 to class4
+
+UPDATE class5
+SET teacher_id = 1; -- Assigning teacher with ID 1 to class5 (cycle back to the first teacher)
