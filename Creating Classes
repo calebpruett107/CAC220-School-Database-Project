@@ -48,41 +48,55 @@ CREATE TABLE WaitListed (
     EntityType VARCHAR(50)
 );
 
--- Step 1: Select students ordered by priority
-WITH PriorityOrdered AS (
-    SELECT *,
-           ROW_NUMBER() OVER (ORDER BY WaitingList ASC) AS RowNum
-    FROM StudentNames
-)
 
--- Step 2: Distribute students into classes
+-- Step 1: Distribute students into classes ordered by waiting list priority and insert directly into class tables
+-- Class 1: First 20 students
 INSERT INTO Class1 (ID, FirstName, LastName, WaitingList, EntityType)
 SELECT ID, FirstName, LastName, WaitingList, 'Student'
-FROM PriorityOrdered
-WHERE RowNum BETWEEN 1 AND 20;
+FROM (
+    SELECT ID, FirstName, LastName, WaitingList, ROW_NUMBER() OVER (ORDER BY WaitingList) AS RowNum
+    FROM StudentNames
+) AS RankedStudents
+WHERE RowNum <= 20;
 
+-- Class 2: Next 20 students
 INSERT INTO Class2 (ID, FirstName, LastName, WaitingList, EntityType)
 SELECT ID, FirstName, LastName, WaitingList, 'Student'
-FROM PriorityOrdered
-WHERE RowNum BETWEEN 21 AND 40;
+FROM (
+    SELECT ID, FirstName, LastName, WaitingList, ROW_NUMBER() OVER (ORDER BY WaitingList) AS RowNum
+    FROM StudentNames
+) AS RankedStudents
+WHERE RowNum > 20 AND RowNum <= 40;
 
+-- Class 3: Next 20 students
 INSERT INTO Class3 (ID, FirstName, LastName, WaitingList, EntityType)
 SELECT ID, FirstName, LastName, WaitingList, 'Student'
-FROM PriorityOrdered
-WHERE RowNum BETWEEN 41 AND 60;
+FROM (
+    SELECT ID, FirstName, LastName, WaitingList, ROW_NUMBER() OVER (ORDER BY WaitingList) AS RowNum
+    FROM StudentNames
+) AS RankedStudents
+WHERE RowNum > 40 AND RowNum <= 60;
 
+-- Class 4: Next 20 students
 INSERT INTO Class4 (ID, FirstName, LastName, WaitingList, EntityType)
 SELECT ID, FirstName, LastName, WaitingList, 'Student'
-FROM PriorityOrdered
-WHERE RowNum BETWEEN 61 AND 80;
+FROM (
+    SELECT ID, FirstName, LastName, WaitingList, ROW_NUMBER() OVER (ORDER BY WaitingList) AS RowNum
+    FROM StudentNames
+) AS RankedStudents
+WHERE RowNum > 60 AND RowNum <= 80;
 
+-- Class 5: Remaining students
 INSERT INTO Class5 (ID, FirstName, LastName, WaitingList, EntityType)
 SELECT ID, FirstName, LastName, WaitingList, 'Student'
-FROM PriorityOrdered
-WHERE RowNum BETWEEN 81 AND 100;
+FROM (
+    SELECT ID, FirstName, LastName, WaitingList, ROW_NUMBER() OVER (ORDER BY WaitingList) AS RowNum
+    FROM StudentNames
+) AS RankedStudents
+WHERE RowNum > 80;
 
--- Step 3: Handle overflow by adding remaining students to WaitListed table
+-- Step 2: Handle overflow by adding remaining students to WaitListed table
 INSERT INTO WaitListed (ID, FirstName, LastName, WaitingList, EntityType)
 SELECT ID, FirstName, LastName, WaitingList, 'Student'
-FROM PriorityOrdered
-WHERE RowNum > 100;
+FROM StudentNames
+WHERE ID NOT IN (SELECT ID FROM Class1 UNION SELECT ID FROM Class2 UNION SELECT ID FROM Class3 UNION SELECT ID FROM Class4 UNION SELECT ID FROM Class5);
