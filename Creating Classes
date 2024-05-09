@@ -1,0 +1,88 @@
+-- Create Class Tables
+CREATE TABLE Class1 (
+    ID INT PRIMARY KEY,
+    FirstName VARCHAR(25),
+    LastName VARCHAR(25),
+    WaitingList INT,
+    EntityType VARCHAR(50)
+);
+
+CREATE TABLE Class2 (
+    ID INT PRIMARY KEY,
+    FirstName VARCHAR(25),
+    LastName VARCHAR(25),
+    WaitingList INT,
+    EntityType VARCHAR(50)
+);
+
+CREATE TABLE Class3 (
+    ID INT PRIMARY KEY,
+    FirstName VARCHAR(25),
+    LastName VARCHAR(25),
+    WaitingList INT,
+    EntityType VARCHAR(50)
+);
+
+CREATE TABLE Class4 (
+    ID INT PRIMARY KEY,
+    FirstName VARCHAR(25),
+    LastName VARCHAR(25),
+    WaitingList INT,
+    EntityType VARCHAR(50)
+);
+
+CREATE TABLE Class5 (
+    ID INT PRIMARY KEY,
+    FirstName VARCHAR(25),
+    LastName VARCHAR(25),
+    WaitingList INT,
+    EntityType VARCHAR(50)
+);
+
+-- Create WaitListed Table
+CREATE TABLE WaitListed (
+    ID INT PRIMARY KEY,
+    FirstName VARCHAR(25),
+    LastName VARCHAR(25),
+    WaitingList INT,
+    EntityType VARCHAR(50)
+);
+
+-- Step 1: Select students ordered by priority
+WITH PriorityOrdered AS (
+    SELECT *,
+           ROW_NUMBER() OVER (ORDER BY WaitingList ASC) AS RowNum
+    FROM StudentNames
+)
+
+-- Step 2: Distribute students into classes
+INSERT INTO Class1 (ID, FirstName, LastName, WaitingList, EntityType)
+SELECT ID, FirstName, LastName, WaitingList, 'Student'
+FROM PriorityOrdered
+WHERE RowNum BETWEEN 1 AND 20;
+
+INSERT INTO Class2 (ID, FirstName, LastName, WaitingList, EntityType)
+SELECT ID, FirstName, LastName, WaitingList, 'Student'
+FROM PriorityOrdered
+WHERE RowNum BETWEEN 21 AND 40;
+
+INSERT INTO Class3 (ID, FirstName, LastName, WaitingList, EntityType)
+SELECT ID, FirstName, LastName, WaitingList, 'Student'
+FROM PriorityOrdered
+WHERE RowNum BETWEEN 41 AND 60;
+
+INSERT INTO Class4 (ID, FirstName, LastName, WaitingList, EntityType)
+SELECT ID, FirstName, LastName, WaitingList, 'Student'
+FROM PriorityOrdered
+WHERE RowNum BETWEEN 61 AND 80;
+
+INSERT INTO Class5 (ID, FirstName, LastName, WaitingList, EntityType)
+SELECT ID, FirstName, LastName, WaitingList, 'Student'
+FROM PriorityOrdered
+WHERE RowNum BETWEEN 81 AND 100;
+
+-- Step 3: Handle overflow by adding remaining students to WaitListed table
+INSERT INTO WaitListed (ID, FirstName, LastName, WaitingList, EntityType)
+SELECT ID, FirstName, LastName, WaitingList, 'Student'
+FROM PriorityOrdered
+WHERE RowNum > 100;
