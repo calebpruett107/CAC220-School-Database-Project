@@ -1,0 +1,29 @@
+-- Update class1 table
+UPDATE class1
+SET StartTime = '10:00',
+    EndTime = '15:00',
+    RoomNumber = 'Room 101';
+
+-- Update class2 table
+UPDATE class2
+SET StartTime = '10:00',
+    EndTime = '15:00',
+    RoomNumber = 'Room 102';
+
+-- Update class3 table
+UPDATE class3
+SET StartTime = '10:00',
+    EndTime = '15:00',
+    RoomNumber = 'Room 103';
+
+-- Update class4 table
+UPDATE class4
+SET StartTime = '10:00',
+    EndTime = '15:00',
+    RoomNumber = 'Room 104';
+
+-- Update class5 table
+UPDATE class5
+SET StartTime = '10:00',
+    EndTime = '15:00',
+    RoomNumber = 'Room 105';
